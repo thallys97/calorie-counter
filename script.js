@@ -23,7 +23,7 @@
             // Update the UI with the search results
             data.forEach(item => {
               const resultItem = document.createElement('div');
-              resultItem.textContent = `${item.food_description} - Portions: ${item.portion_size}, Calories: ${item.calories}`;
+              resultItem.textContent = `${item.Display_Name} - Portion: ${item.Portion_Amount} ${item.Portion_Display_Name}; Calories: ${item.Calories}`;
               resultsPanel.appendChild(resultItem);
             });
           }
