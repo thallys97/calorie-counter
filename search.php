@@ -1,65 +1,24 @@
 <?php
-function convertXmlToJson($xmlFilePath) {
-    $xmlContent = simplexml_load_file($xmlFilePath);
-    if ($xmlContent === false) {
-        // Handle the error appropriately
-        die('Error loading XML file.');
-    }
 
-    $jsonContent = json_encode($xmlContent);
-    return json_decode($jsonContent, true);
-}
+$dbPath = __DIR__ . '/database/food_dataBase.sqlite';
+$db = new PDO("sqlite:$dbPath");
 
-function normalizeData($allFoodData) {
-    $normalizedData = [];
-    foreach ($allFoodData as $data) {
-        foreach ($data as $key => $value) {
-            // Normalize and extract the relevant pieces of information
-            $foodItem = [
-                'food_description' => $value['Display_Name'] ?? $value['display_name'] ?? null,
-                // ... add other relevant fields
-            ];
-            if ($foodItem['food_description']) {
-                $normalizedData[] = $foodItem;
-            }
-        }
-    }
-    return $normalizedData;
-}
-
-$xmlFilesPath = __DIR__ . '/food_data/';
-$allFoodData = [];
-
-foreach (glob($xmlFilesPath . "*.xml") as $xmlFile) {
-    $foodData = convertXmlToJson($xmlFile);
-    // Merge while preserving keys
-    $allFoodData = array_merge_recursive($allFoodData, $foodData);
-}
-
-$normalizedData = normalizeData($allFoodData);
-
-
-
-
-// Search function to find matching food items
-function searchFoodItems($data, $searchTerm) {
-    $results = [];
-    $searchTerm = strtolower($searchTerm);
-    foreach ($data as $item) {
-        if (strpos(strtolower($item['food_description']), $searchTerm) !== false) {
-            $results[] = $item;
-        }
-    }
+// Função para buscar itens de comida correspondentes ao termo de pesquisa
+function searchFoodItems($db, $searchTerm) {
+    $query = "SELECT * FROM Food_Display_Table WHERE Display_Name LIKE :searchTerm";
+    $stmt = $db->prepare($query);
+    // Usando o operador LIKE para busca parcial, % indica qualquer sequência de caracteres
+    $stmt->execute([':searchTerm' => '%' . $searchTerm . '%']);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $results;
 }
 
 // Handle the AJAX request
 $searchTerm = $_GET['search'] ?? '';
 if (!empty($searchTerm)) {
-    $foundItems = searchFoodItems($normalizedData, $searchTerm);
+    $foundItems = searchFoodItems($db, $searchTerm);
 
-     // Consider adding HTTP response codes for better error handling
-     if (empty($foundItems)) {
+    if (empty($foundItems)) {
         http_response_code(404);
         echo json_encode(['error' => 'No matches found.']);
     } else {
@@ -71,3 +30,4 @@ if (!empty($searchTerm)) {
 }
 
 ?>
+
