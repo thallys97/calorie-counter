@@ -18,31 +18,36 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error loading food items:', error);
         });
 
-    function showResults(filteredItems) {
-        // Limpa os resultados anteriores e esconde o botão Load More
-        if (itemsShownCount === 0) {
-            resultsPanel.innerHTML = '';
-            loadMoreBtn.classList.add('hidden');
+        function showResults(filteredItems) {
+            // Limpa os resultados anteriores e esconde o botão Load More
+            if (itemsShownCount === 0) {
+                resultsPanel.innerHTML = '';
+                loadMoreBtn.classList.add('hidden');
+            }
+        
+            // Determina quantos itens devem ser mostrados nesta iteração
+            let itemsToShow = filteredItems.slice(itemsShownCount, itemsShownCount + 25);
+            itemsToShow.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.textContent = `${item.Display_Name} - Portion: ${item.Portion_Amount} ${item.Portion_Display_Name}; Calories: ${item.Calories}`;
+                resultsPanel.appendChild(resultItem);
+            });
+        
+            // Atualiza o contador de itens mostrados
+            itemsShownCount += itemsToShow.length;
+        
+            // Atualiza a contagem de resultados acima do painel de resultados
+            const resultsCount = document.getElementById('results-count');
+            resultsCount.textContent = `Showing ${itemsShownCount} of ${currentFilteredItems.length} results`;
+        
+            // Exibe o botão Load More se ainda houver mais itens para mostrar
+            if (itemsShownCount < filteredItems.length) {
+                loadMoreBtn.classList.remove('hidden');
+            } else {
+                loadMoreBtn.classList.add('hidden');
+            }
         }
-
-        // Determina quantos itens devem ser mostrados nesta iteração
-        let itemsToShow = filteredItems.slice(itemsShownCount, itemsShownCount + 25);
-        itemsToShow.forEach(item => {
-            const resultItem = document.createElement('div');
-            resultItem.textContent = `${item.Display_Name} - Portion: ${item.Portion_Amount} ${item.Portion_Display_Name}; Calories: ${item.Calories}`;
-            resultsPanel.appendChild(resultItem);
-        });
-
-        // Atualiza o contador de itens mostrados
-        itemsShownCount += itemsToShow.length;
-
-        // Exibe o botão Load More se ainda houver mais itens para mostrar
-        if (itemsShownCount < filteredItems.length) {
-            loadMoreBtn.classList.remove('hidden');
-        } else {
-            loadMoreBtn.classList.add('hidden');
-        }
-    }
+        
 
     searchBtn.addEventListener('click', function() {
         let searchTerm = foodSearch.value.trim().toLowerCase();
@@ -103,5 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         warningMessage.textContent = '';
         loadMoreBtn.classList.add('hidden');
         itemsShownCount = 0; // Reseta o contador de itens mostrados
+        document.getElementById('results-count').textContent = ''; // Limpa a contagem de resultados
     });
+    
 });
