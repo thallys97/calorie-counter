@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     searchBtn.addEventListener('click', function() {
-        const searchTerm = foodSearch.value.trim().toLowerCase();
+        let searchTerm = foodSearch.value.trim().toLowerCase();
         warningMessage.textContent = '';
         itemsShownCount = 0; // Reseta o contador de itens mostrados
 
@@ -54,7 +54,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        currentFilteredItems = allFoodItems.filter(item => item.Display_Name.toLowerCase().includes(searchTerm));
+        // Converte wildcard characters para regex
+        searchTerm = searchTerm.replace(/\*/g, '.*').replace(/\?/g, '.');
+
+        // Cria uma expressão regular a partir do termo de busca
+        const searchRegex = new RegExp(searchTerm);
+
+        // Filtra os itens usando a expressão regular
+        currentFilteredItems = allFoodItems.filter(item => searchRegex.test(item.Display_Name.toLowerCase()));
 
         if (currentFilteredItems.length === 0) {
             warningMessage.textContent = 'No matches found.';
