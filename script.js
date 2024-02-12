@@ -65,7 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Adiciona funcionalidade ao botão Load More
     loadMoreBtn.addEventListener('click', function() {
+        const lastItem = resultsPanel.lastElementChild;
         showResults(currentFilteredItems);
+    
+        // Rola suavemente para o último item visível antes de carregar mais
+        if (lastItem) {
+            lastItem.scrollIntoView({ behavior: "smooth" });
+        }
     });
 
     // Clear button functionality
