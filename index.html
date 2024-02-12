@@ -29,11 +29,35 @@
     </div>
 
     <div class="mt-8">
+      <!-- Mini-tabela de caracteres coringas -->
+      <table class="table-auto border-collapse border border-gray-400 mx-auto mb-4">
+        <thead>
+          <tr>
+            <th class="border border-gray-300 px-4 py-2">wildcard character</th>
+            <th class="border border-gray-300 px-4 py-2">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2 text-center">*</td>
+            <td class="border border-gray-300 px-4 py-2">If you want to search for all foods, just write * in the search field</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2 text-center">?</td>
+            <td class="border border-gray-300 px-4 py-2">In case you don't remember how to spell a certain word. Example: app?e</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-4 py-2 text-center">|</td>
+            <td class="border border-gray-300 px-4 py-2">In case you want to add more than one search term. Example: milk|apple</td>
+          </tr>
+        </tbody>
+      </table>
       <div id="warning-message" class="text-red-500"></div> <!-- Mensagem de aviso -->
       <input type="text" id="food-search" class="border border-gray-300 rounded py-2 px-4 w-full" placeholder="e.g., apples or Arby's">
       <button id="search-btn" class="border border-gray-300 rounded py-2 px-4 mt-4">Search</button>
       <button id="clear-btn" class="border border-gray-300 rounded py-2 px-4 mt-4 ml-4">Clear</button>
-  </div>
+    </div>
+    
   
 
     <!-- Results panel -->
