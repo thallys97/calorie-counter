@@ -54,21 +54,35 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Converte wildcard characters para regex
-        searchTerm = searchTerm.replace(/\*/g, '.*').replace(/\?/g, '.');
+        // Converte wildcard characters para regex, incluindo a alternância '|'
+        searchTerm = searchTerm.replace(/\*/g, '.*').replace(/\?/g, '.').replace(/\|/g, '|');
 
-        // Cria uma expressão regular a partir do termo de busca
-        const searchRegex = new RegExp(searchTerm);
+        // Verifica se a entrada é segura para evitar expressões regulares complexas
+        if (isSearchTermSafe(searchTerm)) {
+            // Cria uma expressão regular a partir do termo de busca
+            const searchRegex = new RegExp(searchTerm, 'i'); // 'i' para case-insensitive
 
-        // Filtra os itens usando a expressão regular
-        currentFilteredItems = allFoodItems.filter(item => searchRegex.test(item.Display_Name.toLowerCase()));
+            // Filtra os itens usando a expressão regular
+            currentFilteredItems = allFoodItems.filter(item => searchRegex.test(item.Display_Name.toLowerCase()));
 
-        if (currentFilteredItems.length === 0) {
-            warningMessage.textContent = 'No matches found.';
+            if (currentFilteredItems.length === 0) {
+                warningMessage.textContent = 'No matches found.';
+            } else {
+                showResults(currentFilteredItems);
+            }
         } else {
-            showResults(currentFilteredItems);
+            warningMessage.textContent = 'Invalid search term.';
         }
     });
+
+
+     // Implemente esta função para verificar a segurança do termo de busca
+     function isSearchTermSafe(term) {
+        // Exemplo simples de verificação: limita o comprimento da entrada
+        // e verifica caracteres ou padrões específicos que você deseja excluir
+        return term.length <= 100; // Ajuste conforme necessário
+    }
+
 
     // Adiciona funcionalidade ao botão Load More
     loadMoreBtn.addEventListener('click', function() {
