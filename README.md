@@ -82,6 +82,7 @@ To use the Calorie Counter App, follow these steps after installation:
 ![calorie counting app after food search](https://i.imgur.com/h3f5I6X.png)
 - **Calorie counting app on mobile device screen**: 
 <br/>
+
 ![calorie counting app on mobile device screen](https://i.imgur.com/Trdxcu4.png)
 
 
