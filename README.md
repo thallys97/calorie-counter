@@ -71,7 +71,7 @@ To use the Calorie Counter App, follow these steps after installation:
 
 - **Click on the image below to be redirected to Youtube and see a video demonstration of the calorie counting app's features**:
 
-[![Calorie Counting App Demonstration](http://img.youtube.com/vi/jnPGSzirA7M.jpg)](http://www.youtube.com/watch?v=jnPGSzirA7M "Calorie Counting App Demonstration")
+[![Calorie Counting App Demonstration](https://i.imgur.com/5tj89BS.png)](http://www.youtube.com/watch?v=jnPGSzirA7M "Calorie Counting App Demonstration")
 
 
 ## Screenshots
@@ -80,7 +80,8 @@ To use the Calorie Counter App, follow these steps after installation:
 ![calorie counting app before food search](https://i.imgur.com/5tj89BS.png)
 - **Calorie counting app after food search**:
 ![calorie counting app after food search](https://i.imgur.com/h3f5I6X.png)
-- **Calorie counting app on mobile device screen**:
+- **Calorie counting app on mobile device screen**: 
+<br/>
 ![calorie counting app on mobile device screen](https://i.imgur.com/Trdxcu4.png)
 
 
