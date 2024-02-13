@@ -27,6 +27,8 @@ To set up the Calorie Counter App on your system, follow these detailed steps:
 
 Ensure you have PHP and Composer installed on your system. PHP is required for running the server and executing the scripts, while Composer is necessary for managing the PHP dependencies.
 
+PHP 8.1 was used to develop this application
+
 ### Steps
 
 1. **Clone the Repository**: Clone the project repository to your local machine using `git clone <repository-url>`.
@@ -67,19 +69,24 @@ To use the Calorie Counter App, follow these steps after installation:
 
 ## Video
 
+- **Click on the image below to be redirected to Youtube and see a video demonstration of the calorie counting app's features**:
+
+[![Calorie Counting App Demonstration](http://img.youtube.com/vi/jnPGSzirA7M.jpg)](http://www.youtube.com/watch?v=jnPGSzirA7M "Calorie Counting App Demonstration")
+
 
 ## Screenshots
 
-Here are some screenshots of the app:
+- **Calorie counting app before food search**:
 ![calorie counting app before food search](https://i.imgur.com/5tj89BS.png)
+- **Calorie counting app after food search**:
 ![calorie counting app after food search](https://i.imgur.com/h3f5I6X.png)
+- **Calorie counting app on mobile device screen**:
 ![calorie counting app on mobile device screen](https://i.imgur.com/Trdxcu4.png)
 
 
 
 ## Dependencies
 
-- PHP 7.4 or higher
 - [phpoffice/phpspreadsheet](https://packagist.org/packages/phpoffice/phpspreadsheet) for handling Excel files.
 
 
