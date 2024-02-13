@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let itemsToShow = filteredItems.slice(itemsShownCount, itemsShownCount + 25);
             itemsToShow.forEach(item => {
                 const resultItem = document.createElement('div');
+                resultItem.className = 'mb-2'; // Adiciona uma margem na parte inferior de cada item
                 resultItem.textContent = `${item.Display_Name} - Portion: ${item.Portion_Amount} ${item.Portion_Display_Name}; Calories: ${item.Calories}`;
                 resultsPanel.appendChild(resultItem);
             });
